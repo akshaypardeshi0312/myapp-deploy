@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp
+  annotations:
+    cert-manager.io/cluster-issuer: lab-selfsigned
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - myapp.lab.local
+    secretName: myapp-tls
+  rules:
+  - host: myapp.lab.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: myapp
+            port:
+              number: 80
