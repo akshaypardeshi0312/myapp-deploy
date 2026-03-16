@@ -13,8 +13,10 @@ spec:
       labels:
         app: myapp
     spec:
+      imagePullSecrets:
+      - name: harbor-secret
       containers:
       - name: myapp
-        image: harbor.lab.local/lab/myapp:latest
+        image: 10.10.50.242/lab/myapp:v1.0
         ports:
         - containerPort: 5000
